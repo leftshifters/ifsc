@@ -5,7 +5,7 @@ var utils = require('../lib/utils');
 
 describe("Store", function() {
 
-  it("storeExists() and staleDump()", function(done) {
+  it("Checks the results of storeExists() and staleDump() for existence and non-existence file.", function(done) {
     let s = new Store({ diskPath: "test/ifsc_notexist.xls" });
     s.storeExists((err, stats, exists) => {
       expect(err.code).to.be.equal("ENOENT");
@@ -34,14 +34,14 @@ describe("Store", function() {
     });
   });
 
-  it("parseStores() and getStore()", function() {
+  it("parseStores() and getStore(): Checks if result after parsing has length 4 or not ", function() {
     let s = new Store({ diskPath: "test/ifsc.xls" });
     s.parseStores();
     store = s.getStore();
     expect(store.branches.length).to.be.equal(4);
   });
 
-  it("readLocalStore()", function(done) {
+  it("readLocalStore(): Checks for ifsc file records should not null and has length = 4.", function(done) {
     let filePath = "test/ifsc.xls";
     let s = new Store({ diskPath: filePath });
     s.readLocalStore((err, branches) => {
@@ -51,7 +51,7 @@ describe("Store", function() {
     });
   });
 
-  it("readLocalStore2() with no file", function(done) {
+  it("readLocalStore2(): read the local ifsc_32mb file and expect to have records", function(done) {
     this.timeout(0);
     filePath = "test/ifsc_32mb.xls";
 

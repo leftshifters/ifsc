@@ -1,12 +1,26 @@
 const expect = require("chai").expect;
 const Parser = require('../lib/parser');
+const utils = require('../lib/utils');
 
-describe('inMemory', function () {
-  it('find()', function () {
-    let p = new Parser();
+describe('Test the module for fullTextSearch', function () {
+  let p = new Parser();
+  it('Query the string using inMemory', function () {
     branches = p.parse("test/ifsc.xls");
-    console.log(branches);
-    const output = branches.find("400065003" );
-    expect(output.length).to.be.equal(1);
+    const output = branches.find("25260173",'');
+    console.log('\n output is ',output, typeof output[0]);
+    expect(output).to.be.
+    expect(output).to.be.an('Array');
+  });
+
+  it('Query the string using full-text-search-ligh Npm', function () {
+
   });
 });
+
+
+// describe('utils', function () {
+//   it('find()', function () {
+//     let res = utils.fileExists('ifsc.xls');
+//     expect(res).to.be.equal(true)
+//   });
+// });

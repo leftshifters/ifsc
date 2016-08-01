@@ -5,18 +5,18 @@ var fs = require('fs');
 
 describe("Scrapper", function() {
 
-  it("init() with url", function() {
+  it("init(): Intialize the class with url", function() {
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     expect(s).to.have.property("scanURL", "https://www.rbi.org.in/scripts/neft.aspx");
   });
 
-  it("fetch()", function(done) {
+  it("Checks if the fetch() method fetch the the requested link or not", function(done) {
     this.timeout(3000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.fetch(() => done());
   })
 
-  it("find()", function(done) {
+  it("find(): Checks for bank details xls link.", function(done) {
     this.timeout(3000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.find((err, link) => {
@@ -25,7 +25,7 @@ describe("Scrapper", function() {
     });
   });
 
-  it("download()", function(done) {
+  it("download(): Checks if the ifsc code file is downloaded or not.", function(done) {
 
     var filePath = "test/ifsc_download.xls";
     if (utils.fileExists()) {
