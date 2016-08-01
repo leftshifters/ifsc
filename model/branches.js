@@ -1,6 +1,6 @@
-var Branch = require('./branch');
-var _ = require("underscore");
-var InMemory  = require('../lib/fullTextSearch/inMemory');
+const Branch = require('./branch');
+const _ = require("underscore");
+const InMemory  = require('../lib/fullTextSearch/inMemory');
 
 class Branches {
 

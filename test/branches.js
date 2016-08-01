@@ -6,14 +6,9 @@ describe('Test the module for fullTextSearch', function () {
   let p = new Parser();
   it('Query the string using inMemory', function () {
     branches = p.parse("test/ifsc.xls");
-    const output = branches.find("25260173",'');
-    console.log('\n output is ',output, typeof output[0]);
-    expect(output).to.be.
-    expect(output).to.be.an('Array');
-  });
-
-  it('Query the string using full-text-search-ligh Npm', function () {
-
+    const output = branches.find("mumbai",'');
+    console.log('\n output[0] is ',output[0].city, typeof output[0]);
+    expect(output[0].city).to.be.equal('MUMBAI');
   });
 });
 

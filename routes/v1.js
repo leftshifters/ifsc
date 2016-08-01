@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var Store = require('../lib/store');
+const express = require('express');
+const router = express.Router();
+const Store = require('../lib/store');
 
-var store = new Store({ diskPath: "ifsc.xls" });
+const store = new Store({ diskPath: "ifsc.xls" });
 var branches;
 store.readLocalStore(function(err) {
   if (err) console.log(err);

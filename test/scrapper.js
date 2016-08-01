@@ -1,7 +1,7 @@
-var expect = require("chai").expect;
-var Scrapper = require('../lib/scrapper');
-var utils = require('../lib/utils');
-var fs = require('fs');
+const expect = require("chai").expect;
+const Scrapper = require('../lib/scrapper');
+const utils = require('../lib/utils');
+const fs = require('fs');
 
 describe("Scrapper", function() {
 

@@ -1,7 +1,7 @@
-var expect = require("chai").expect;
-var Store = require("../lib/store");
-var fs = require('fs');
-var utils = require('../lib/utils');
+const expect = require("chai").expect;
+const Store = require("../lib/store");
+const fs = require('fs');
+const utils = require('../lib/utils');
 
 describe("Store", function() {
 
