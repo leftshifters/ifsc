@@ -29,7 +29,7 @@ class Branches {
     switch (method) {
       case undefined:
       case '':
-      case 'filter':
+      case 'inmemory':
         var filter = new InMemory(this.branches);
         return filter.search(query);
 
