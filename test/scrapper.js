@@ -3,6 +3,7 @@ const Scrapper = require('../lib/scrapper');
 const utils = require('../lib/utils');
 const fs = require('fs');
 
+// Test Cases for the lib/scrapper module
 describe("Scrapper", function() {
 
   it("init(): Intialize the class with url", function() {

@@ -3,6 +3,7 @@ const Store = require("../lib/store");
 const fs = require('fs');
 const utils = require('../lib/utils');
 
+// Test Cases for the lib/Store module
 describe("Store", function() {
 
   it("Checks the results of storeExists() and staleDump() for existence and non-existence file.", function(done) {

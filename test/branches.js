@@ -9,11 +9,11 @@ describe('FullTextSearch using inMemory', function () {
     expect(p).to.exist;
   })
 
+ // checks for the string search results
   it('Checks for a string query mumbai', function () {
     let p = new Parser();
     const branches = p.parse("test/ifsc.xls");
     const output = branches.find("mumbai",'');
-    console.log('\n output[0] is ',output[0].city, typeof output[0]);
     expect(output).to.be.not.null
     expect(output[0].city).to.be.equal('MUMBAI');
   });

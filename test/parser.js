@@ -1,6 +1,7 @@
 const expect = require("chai").expect;
 const Parser = require('../lib/parser');
 
+// Test Cases for the lib/parser module.
 describe("Parser", function() {
 
   it("check for the init() to be not null", function() {
