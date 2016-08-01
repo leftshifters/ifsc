@@ -1,24 +1,24 @@
-var Branch = require('./branch')
-var _ = require("underscore")
+var Branch = require('./branch');
+var _ = require("underscore");
 var InMemory  = require('../lib/fullTextSearch/inMemory');
 
 class Branches {
 
   constructor(options) {
-    this.branches = []
+    this.branches = [];
   }
 
   add(branch) {
     // Only add if the bank has a name
     if (branch.bank) {
-      this.branches.push(branch)
+      this.branches.push(branch);
     }
   }
 
   find(query, method) {
     // If empty return
     if (query == "") {
-      return []
+      return [];
     }
 
     // TODO : Add proper error handling
@@ -39,4 +39,4 @@ class Branches {
   }
 }
 
-module.exports = Branches
+module.exports = Branches;
