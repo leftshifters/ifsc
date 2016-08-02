@@ -3,7 +3,7 @@ const router = express.Router();
 const Store = require('../lib/store');
 
 const store = new Store({ diskPath: "ifsc.xls" });
-var branches;
+const branches;
 store.readLocalStore(function(err) {
   if (err) console.log(err);
   else {

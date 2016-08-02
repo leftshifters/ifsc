@@ -30,8 +30,9 @@ class Branches {
       case undefined:
       case '':
       case 'inmemory':
-        var filter = new InMemory(this.branches);
-        return filter.search(query);
+        const inMemory = new InMemory(this.branches);
+        return inMemory.search(query);
+
 
       default:
         // TODO : return error that we could not understand

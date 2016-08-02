@@ -4,18 +4,18 @@ const Parser = require('../lib/parser');
 // Test Cases for the lib/parser module.
 describe("Parser", function() {
 
-  it("check for the init() to be not null", function() {
+  it("init() to be not null", function() {
     let p = new Parser({});
     expect(p).to.not.be.null;
   });
 
-  it("checks if parse() result branches property length equal to 4", function() {
+  it("Parse() result branches property length equal to 4", function() {
     let p = new Parser({});
     const branches = p.parse("test/ifsc.xls");
     expect(branches.branches.length).to.be.equal(4);
   });
 
-  it("checks if result of find() has length equal to 1", function() {
+  it("Result of find() has length equal to 1", function() {
     this.timeout(30000);
     let p = new Parser();
     const branches = p.parse("test/ifsc.xls");

@@ -1,16 +1,16 @@
 const expect = require("chai").expect;
 const Parser = require('../lib/parser');
 
-describe('FullTextSearch using inMemory', function () {
+describe('inMemory', function () {
 
   //checks that intialize value is neither null or undefined.
-  it('Checks for intialized object not equal null or undefined', function () {
+  it('Intialized object should not equal null or undefined', function () {
     let p = new Parser();
     expect(p).to.exist;
   })
 
  // checks for the string search results
-  it('Checks for a string query mumbai', function () {
+  it('find() mehthod should fetch all matching branches', function () {
     let p = new Parser();
     const branches = p.parse("test/ifsc.xls");
     const output = branches.find("mumbai",'');

@@ -6,7 +6,7 @@ const utils = require('../lib/utils');
 // Test Cases for the lib/Store module
 describe("Store", function() {
 
-  it("Checks the results of storeExists() and staleDump() for existence and non-existence file.", function(done) {
+  it("Results of storeExists() and staleDump() for existence and non-existence file.", function(done) {
     let s = new Store({ diskPath: "test/ifsc_notexist.xls" });
     s.storeExists((err, stats, exists) => {
       expect(err.code).to.be.equal("ENOENT");

@@ -11,7 +11,7 @@ describe("Scrapper", function() {
     expect(s).to.have.property("scanURL", "https://www.rbi.org.in/scripts/neft.aspx");
   });
 
-  it("Checks if the fetch() method fetch the the requested link or not", function(done) {
+  it("fetch() method fetch the the requested link or not", function(done) {
     this.timeout(3000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.fetch(() => done());
