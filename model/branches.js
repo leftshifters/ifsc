@@ -2,6 +2,8 @@ const Branch = require('./branch');
 const _ = require("underscore");
 const InMemory  = require('../lib/fullTextSearch/inMemory');
 const FullTextSearchLight = require('../lib/fullTextSearch/fullTextSearchLight');
+const SearchIndex = require('../lib/fullTextSearch/searchIndex');
+const elasticlunr = require('../lib/fullTextSearch/elasticLunar');
 
 class Branches {
 
@@ -33,10 +35,15 @@ class Branches {
       case 'inmemory':
         const inMemory = new InMemory(this.branches);
         return inMemory.search(query);
-
       case 'ftslight':
         const ftslight = new FullTextSearchLight(this.branches);
         return ftslight.find(query);
+      case 'searchindex':
+        // const searchIndex = new SearchIndex();
+        return SearchIndex.searchI(query, this.branches);
+        // find(query, this.branches);
+      case 'elasticlunr':
+        return elasticlunr.elasticLunar(query, this.branches);
       default:
         // TODO : return error that we could not understand
     }
