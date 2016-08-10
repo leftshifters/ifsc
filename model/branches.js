@@ -1,6 +1,7 @@
 const Branch = require('./branch');
 const _ = require("underscore");
 const InMemory  = require('../lib/fullTextSearch/inMemory');
+const Database = require('./databaseStorage');
 
 class Branches {
 
@@ -32,9 +33,9 @@ class Branches {
       case 'inmemory':
         const inMemory = new InMemory(this.branches);
         return inMemory.search(query);
-      case 'ftslight':
-        const ftslight = new FullTextSearchLight(this.branches);
-        return ftslight.find(query);
+      case 'db':
+        const database = new Database();
+
 
       default:
         // TODO : return error that we could not understand

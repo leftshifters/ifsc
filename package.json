@@ -17,6 +17,7 @@
     "full-text-search-light": "0.0.16",
     "mocha": "^2.5.3",
     "morgan": "~1.7.0",
+    "pg": "^6.0.3",
     "pug": "^2.0.0-beta4",
     "request": "^2.73.0",
     "search-index": "^0.8.12",
