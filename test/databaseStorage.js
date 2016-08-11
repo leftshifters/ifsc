@@ -16,8 +16,8 @@ describe('database', function () {
   //checks that intialize value is neither null or undefined.
   it('Intialized and insert values in tables.', function (done) {
     p = new Parser();
-    // this.timeout(360000);
-    const branches = p.parse("test/ifsc.xls");
+    this.timeout(360000);
+    const branches = p.parse("test/ifsc_32mb.xls");
 
     database.insert(branches.branches).then(() => done());
     // done();
@@ -29,9 +29,9 @@ describe('database', function () {
   it('searchdb() method should fetch all matching branches', function (done) {
     this.timeout(360000);
     console.time('find');
-    database.search('mumbai').then(res => {
+    database.search('pune kharadi').then(res => {
       // console.log(res);
-      console.log('results is '+res);
+      console.log('results is ', res.length, res[0]);
       expect(res).to.be.not.null
       console.timeEnd('find');
       done()

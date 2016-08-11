@@ -58,7 +58,7 @@ class BranchesDb {
         if (err) {
           return rej(err);
         }
-        console.log('inserted');
+        // console.log('inserted');
         res();
       });
     });
@@ -72,24 +72,22 @@ class BranchesDb {
         // console.log(this.insertOne);
         return this.insertOne(query, branch);
       }));
-
   }
 
   search(searchStr) {
     const output = [];
     console.log('in the searchstr');
-    const q = 'SELECT * FROM branches WHERE to_tsvector(searchString) @@ to_tsquery($1);';
+    const q = 'SELECT * FROM branches WHERE (searchstring) @@  plainto_tsquery($1);';
 
     return new Promise((res, rej) => {
       console.log('in the return search ');
+      console.time('search');
       this.client.query(q, [searchStr],  (err, results) => {
         if (err) {
           return res(err);
         }
-        // this.client.on('row', function(row) {
-        //   output.push(row);
-        // });
 
+        console.timeEnd('search');
         res(results.rows);
       });
 
@@ -98,14 +96,6 @@ class BranchesDb {
       // });
     })
   }
-  //   this.client.on('error', function(error) {
-  //     console.log(error);
-  //     return false;
-  //   });
-  //
-  //   this.client.on('end', function() { client.end(); });
-  //   return output;
-  // }
 }
 
 module.exports = BranchesDb;
@@ -114,6 +104,10 @@ module.exports = BranchesDb;
 
 
 /*
+
+
+
+
 // console.log(this.client);
 // this.client.query("INSERT INTO branches values('deepak', 'asdf');");
 // this.client.query("INSERT INTO branches values($1, $2, $3, $4, $5, %6, %7, $8, $9, $10)", [branches[0].bank, branches[0].ifsc, branches[0].micr, branches[0].branch, branches[0].address, branches[0].contact, branches[0].city, branches[0].district, branches[0].searchString]);
@@ -121,6 +115,16 @@ module.exports = BranchesDb;
 //   console.log(error);
 //   return false;
 // });
+
+
+//   this.client.on('error', function(error) {
+//     console.log(error);
+//     return false;
+//   });
+//
+//   this.client.on('end', function() { client.end(); });
+//   return output;
+// }
 
 // console.log('in the insert method');
 //
