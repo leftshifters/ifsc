@@ -3,43 +3,71 @@ const Parser = require('../lib/parser');
 const Database = require('../model/databaseStorage');
 
 describe('database', function () {
-  var branches, database, p;
-  before((done) => {
-    database = new Database();
-    database.conMethod().then(() => done())
-  })
 
-  // after((done) => {
-  //
-  // })
-
-  //checks that intialize value is neither null or undefined.
   it('Intialized and insert values in tables.', function (done) {
-    p = new Parser();
-    this.timeout(360000);
+    const p = new Parser();
+    this.timeout(600000);
     const branches = p.parse("test/ifsc_32mb.xls");
+    // database = new Database();
+    // database.conMethod();
 
-    database.insert(branches.branches).then(() => done());
+    branches.database.insert(branches.branches).then(() => done()).catch(err => {
+      console.error(err);
+    });
     // done();
-
   });
-
 
   // checks for the string search results.
   it('searchdb() method should fetch all matching branches', function (done) {
     this.timeout(360000);
     console.time('find');
-    database.search('pune kharadi').then(res => {
-      // console.log(res);
+    const database = new Database();
+    database.search('state bank  pune').then((res) => {
       console.log('results is ', res.length, res[0]);
-      expect(res).to.be.not.null
+      expect(res).to.be.not.null;
       console.timeEnd('find');
-      done()
+      done();
     }).catch(err => console.log(err));
-
   });
 });
 
+
+
+/*
+var branches, database, p;
+before((done) => {
+  database = new Database();
+  database.conMethod().then(() => done())
+});
+
+// after((done) => {
+//
+// })
+
+//checks that intialize value is neither null or undefined.
+it('Intialized and insert values in tables.', function (done) {
+  p = new Parser();
+  this.timeout(360000);
+  const branches = p.parse("test/ifsc_32mb.xls");
+  database.insert(branches.branches).then(() => done());
+  // done();
+});
+
+
+// checks for the string search results.
+it('searchdb() method should fetch all matching branches', function (done) {
+  this.timeout(360000);
+  console.time('find');
+  database.search('mumbai').then(res => {
+    // console.log(res);
+    console.log('results is ', res.length, res[0]);
+    expect(res).to.be.not.null
+    console.timeEnd('find');
+    done()
+  }).catch(err => console.log(err));
+});
+
+*/
 
 /*
 

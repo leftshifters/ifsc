@@ -7,6 +7,8 @@ class Branches {
 
   constructor(options) {
     this.branches = [];
+    this.database = new Database();
+
   }
 
   add(branch) {
@@ -34,9 +36,7 @@ class Branches {
         const inMemory = new InMemory(this.branches);
         return inMemory.search(query);
       case 'db':
-        const database = new Database();
-
-
+            return this.database.search(query);
       default:
         // TODO : return error that we could not understand
     }

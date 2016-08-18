@@ -12,35 +12,12 @@ class BranchesDb {
 
   constructor () {
     this.client = new pg.Client(config);
-
+    this.client.connect();
     //   //console.log('in the connect meth');
     console.log('in the constructor');
-    //   if (err) return console.error(err);
-    //   // this.client.on('end', function() { client.end(); })
-    // });
-    // connectObj.query("INSERT INTO branches values('deepak', 'dadf')");
-      //console.log('in the constructor of database !!', (this.client));
+
   }
 
-
-  conMethod() {
-    let self = this;
-    console.log('in the conMethod');
-    return new Promise( (res, rej) => {
-      this.client.connect(function (err) {
-        console.log('in the connect meth');
-        // console.log(err);
-
-        if (err) return rej(err)//console.error(err);
-        res(self)
-        //console.log('in the ');
-        // console.log(client);
-
-        // this.client.on('end', function() { client.end(); })
-      });
-
-    })
-  }
 
   insertOne(query, branch) {
     // console.log("here")
@@ -91,9 +68,6 @@ class BranchesDb {
         res(results.rows);
       });
 
-      // this.client.on('row', function(row) {
-      //   output.push(row);
-      // });
     })
   }
 }
@@ -105,8 +79,18 @@ module.exports = BranchesDb;
 
 /*
 
-
-
+// conMethod() {
+//   let self = this;
+//   console.log('in the conMethod');
+//   return new Promise( (res, rej) => {
+//     this.client.connect(function (err) {
+//       console.log('in the connect meth');
+//       // console.log(err);
+//       if (err) return rej(err)//console.error(err);
+//       res(self)
+//     });
+//   })
+// }
 
 // console.log(this.client);
 // this.client.query("INSERT INTO branches values('deepak', 'asdf');");
