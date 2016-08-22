@@ -10,7 +10,6 @@ describe('database', function () {
     const branches = p.parse("test/ifsc_32mb.xls");
     // database = new Database();
     // database.conMethod();
-
     branches.database.insert(branches.branches).then(() => done()).catch(err => {
       console.error(err);
     });
@@ -22,7 +21,10 @@ describe('database', function () {
     this.timeout(360000);
     console.time('find');
     const database = new Database();
-    database.search('state bank  pune').then((res) => {
+    database.search('state bank of india kota rajasthan').then((res) => {
+      // for (var i = 0; i < res.length; i++) {
+      //   // console.log('results is ', res.length, res[i]);
+      // }
       console.log('results is ', res.length, res[0]);
       expect(res).to.be.not.null;
       console.timeEnd('find');

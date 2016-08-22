@@ -1,4 +1,4 @@
-const pg = require('pg');
+const Pool = require('pg').Pool;
 
 const config = {
   user: 'deepakkumarsingh',
@@ -11,7 +11,7 @@ const config = {
 class BranchesDb {
 
   constructor () {
-    this.client = new pg.Client(config);
+    this.client = new Pool(config);
     this.client.connect();
     //   //console.log('in the connect meth');
     console.log('in the constructor');
@@ -68,7 +68,7 @@ class BranchesDb {
         res(results.rows);
       });
 
-    })
+    });
   }
 }
 
