@@ -19,17 +19,31 @@ describe('database', function () {
   // checks for the string search results.
   it('searchdb() method should fetch all matching branches', function (done) {
     this.timeout(360000);
-    console.time('find');
+
+    let output , j = 0, start = [];
     const database = new Database();
-    database.search('state bank of india kota rajasthan').then((res) => {
-      // for (var i = 0; i < res.length; i++) {
-      //   // console.log('results is ', res.length, res[i]);
-      // }
-      console.log('results is ', res.length, res[0]);
-      expect(res).to.be.not.null;
-      console.timeEnd('find');
-      done();
-    }).catch(err => console.log(err));
+
+    for (var i = 0; i < 1000; i++) {
+      // console.time('find'+j);
+      start[i] = process.hrtime();
+      database.search('state bank of india kota rajasthan').then((res) => {
+        // for (var i = 0; i < res.length; i++) {
+        //   // console.log('results is ', res.length, res[i]);
+        // }
+        let end = process.hrtime(start[j++]);
+        if (j%10 == 0) {
+          console.log('results is ',j, res.length);
+          console.log('time', end[0]+'s '+end[1]/1000000+'ms');
+        }
+        expect(res).to.be.not.null;
+
+
+        // expect(output).to.be.equal('MUMBAI');
+        // done();
+      }).catch(err => console.log(err));
+    }
+    // console.log(output);
+
   });
 });
 

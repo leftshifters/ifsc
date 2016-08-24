@@ -1,12 +1,15 @@
 const Pool = require('pg').Pool;
-
+require('events').EventEmitter.prototype._maxListeners = 50;
 const config = {
   user: 'deepakkumarsingh',
   host: 'localhost',
   port: 5432,
-  database: 'leftshifter'
+  database: 'leftshifter',
+  max: 20,
+  idleTimeoutMillis: 10000
 };
 
+var inc = 0;
 
 class BranchesDb {
 
@@ -53,18 +56,29 @@ class BranchesDb {
 
   search(searchStr) {
     const output = [];
-    console.log('in the searchstr');
+    // console.log('in the searchstr');
     const q = 'SELECT * FROM branches WHERE (searchstring) @@  plainto_tsquery($1);';
+    this.client.on('drain', this.client.end.bind(this.client));
+    this.client.on('error', function (err, client) {
+  // if an error is encountered by a client while it sits idle in the pool
+  // the pool itself will emit an error event with both the error and
+  // the client which emitted the original error
+  // this is a rare occurrence but can happen if there is a network partition
+  // between your application and the database, the database restarts, etc.
+  // and so you might want to handle it and at least log it out
+    console.error('idle client error', err.message, err.stack)
+  })
 
     return new Promise((res, rej) => {
-      console.log('in the return search ');
+      // console.log('search method ');
       console.time('search');
       this.client.query(q, [searchStr],  (err, results) => {
         if (err) {
           return res(err);
         }
-
-        console.timeEnd('search');
+        // console.log(inc++);
+        // console.log('results has been fetched ', results.rows[0]);
+        // console.timeEnd('search');
         res(results.rows);
       });
 
