@@ -1,29 +1,29 @@
 const Pool = require('pg').Pool;
-require('events').EventEmitter.prototype._maxListeners = 50;
+const debug = require('debug')('ifsc:model:databaseStorage');
+const events = require('events').EventEmitter;
+events.defaultMaxListeners = 0;
+
 const config = {
   user: 'deepakkumarsingh',
   host: 'localhost',
   port: 5432,
   database: 'leftshifter',
   max: 20,
-  idleTimeoutMillis: 10000
+  idleTimeoutMillis: 5000
 };
-
-var inc = 0;
 
 class BranchesDb {
 
   constructor () {
     this.client = new Pool(config);
     this.client.connect();
-    //   //console.log('in the connect meth');
-    console.log('in the constructor');
+    debug('in the constructor');
 
   }
 
 
   insertOne(query, branch) {
-    // console.log("here")
+
     return new Promise((res, rej) => {
       this.client.query(query, [  branch.bank,
                                   branch.ifsc,
@@ -38,8 +38,8 @@ class BranchesDb {
         if (err) {
           return rej(err);
         }
-        // console.log('inserted');
         res();
+
       });
     });
   }
@@ -49,29 +49,26 @@ class BranchesDb {
     var query = "INSERT INTO branches values($1, $2, $3, $4, $5, $6, $7, $8, $9, to_tsvector($10));";
 
     return Promise.all(branches.map((branch) => {
-        // console.log(this.insertOne);
-        return this.insertOne(query, branch);
-      }));
+      return this.insertOne(query, branch);
+    }));
   }
 
   search(searchStr) {
     const output = [];
-    // console.log('in the searchstr');
     const q = 'SELECT * FROM branches WHERE (searchstring) @@  plainto_tsquery($1);';
     this.client.on('drain', this.client.end.bind(this.client));
     this.client.on('error', function (err, client) {
-  // if an error is encountered by a client while it sits idle in the pool
-  // the pool itself will emit an error event with both the error and
-  // the client which emitted the original error
-  // this is a rare occurrence but can happen if there is a network partition
-  // between your application and the database, the database restarts, etc.
-  // and so you might want to handle it and at least log it out
-    console.error('idle client error', err.message, err.stack)
-  })
+    // if an error is encountered by a client while it sits idle in the pool
+    // the pool itself will emit an error event with both the error and
+    // the client which emitted the original error
+    // this is a rare occurrence but can happen if there is a network partition
+    // between your application and the database, the database restarts, etc.
+    // and so you might want to handle it and at least log it out
+      console.error('idle client error', err.message, err.stack);
+    })
 
     return new Promise((res, rej) => {
-      // console.log('search method ');
-      console.time('search');
+      debug('search');
       this.client.query(q, [searchStr],  (err, results) => {
         if (err) {
           return res(err);

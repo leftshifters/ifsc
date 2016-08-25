@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const Parser = require('../lib/parser');
 const Database = require('../model/databaseStorage');
-
+const debug = require('debug')('ifsc:test:databaseStorage');
 describe('database', function () {
 
   it('Intialized and insert values in tables.', function (done) {
@@ -10,7 +10,9 @@ describe('database', function () {
     const branches = p.parse("test/ifsc_32mb.xls");
     // database = new Database();
     // database.conMethod();
-    branches.database.insert(branches.branches).then(() => done()).catch(err => {
+    branches.database.insert(branches.branches)
+    .then(() => done())
+    .catch(err => {
       console.error(err);
     });
     // done();
@@ -18,8 +20,8 @@ describe('database', function () {
 
   // checks for the string search results.
   it('searchdb() method should fetch all matching branches', function (done) {
-    this.timeout(360000);
-
+    this.timeout(15000);
+    debug('in the searchdb');
     let output , j = 0, start = [];
     const database = new Database();
 
@@ -38,7 +40,7 @@ describe('database', function () {
         expect(res).to.be.not.null;
 
 
-        // expect(output).to.be.equal('MUMBAI');
+        expect(res[0].city).to.be.equal('KOTA');
         // done();
       }).catch(err => console.log(err));
     }
