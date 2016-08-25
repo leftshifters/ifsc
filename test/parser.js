@@ -3,22 +3,23 @@ const Parser = require('../lib/parser');
 
 // Test Cases for the lib/parser module.
 describe("Parser", function() {
-
+  let p;
   it("init() to be not null", function() {
-    let p = new Parser({});
+    p = new Parser();
     expect(p).to.not.be.null;
   });
 
-  it("Parse() result branches property length equal to 4", function() {
-    let p = new Parser({});
-    const branches = p.parse("test/ifsc.xls");
-    expect(branches.branches.length).to.be.equal(4);
+  it("Parse() result branches property correct length", function() {
+    // let p = new Parser();
+    this.timeout(400000);
+    const branches = p.parse("test/ifsc_32mb.xls");
+    expect(branches.branches.length).to.be.equal(132602);
   });
 
   it("Result of find() has length equal to 1", function() {
-    this.timeout(30000);
-    let p = new Parser();
-    const branches = p.parse("test/ifsc.xls");
+    this.timeout(400000);
+    // let p = new Parser();
+    const branches = p.parse("test/ifsc_32mb.xls");
     // branches = p.parse("68774.xls")
     // console.time("find");
     found = branches.find("mumbai wadia bail");

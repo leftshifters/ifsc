@@ -12,13 +12,13 @@ describe("Scrapper", function() {
   });
 
   it("fetch() method fetch the the requested link or not", function(done) {
-    this.timeout(3000);
+    this.timeout(30000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.fetch(() => done());
   })
 
   it("find(): Checks for bank details xls link.", function(done) {
-    this.timeout(3000);
+    this.timeout(30000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.find((err, link) => {
       expect(link).to.be.equal("https://rbidocs.rbi.org.in/rdocs/content/docs/68774.xls");

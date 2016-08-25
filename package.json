@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prestart": "DEBUG=ifsc* mocha",
     "start": "DEBUG=ifsc* node ./bin/www"
   },
   "dependencies": {
