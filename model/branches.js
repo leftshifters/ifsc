@@ -24,9 +24,9 @@ class Branches {
       return [];
     }
 
-    // TODO : Add proper error handling
     // Remove white spaces
-    // method = method.replace(/\s+/g, '');
+    method = method.replace(/\s+/g, '');
+    // TODO : Add proper error handling
 
     // Based on the method defined, call the appropriate full text library
     switch (method) {
@@ -39,6 +39,8 @@ class Branches {
             return this.database.search(query);
       default:
         // TODO : return error that we could not understand
+        let err = new Error('undefined method call.');
+        return(err);
     }
   }
 }
