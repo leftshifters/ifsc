@@ -1,5 +1,19 @@
 #!/usr/bin/env node
 
+if ('production' === process.env.NODE_ENV) {
+  try {
+
+    require('newrelic');
+
+  } catch (e) {
+    console.error('newrelic is not installed !!');
+  }
+}
+
+  
+
+
+
 /**
  * Module dependencies.
  */
