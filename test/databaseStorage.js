@@ -7,16 +7,15 @@ describe('database', function () {
 
   it('Intialized and insert values in tables.', function (done) {
     const p = new Parser();
-    this.timeout(360000);
-    const branches = p.parse("test/ifsc_32mb.xls");
-    // database = new Database();
-    // database.conMethod();
-    // branches.database.insert(branches.branches)
-    // .then(() => done())
-    // .catch(err => {
-    //   console.error(err);
-    // });
-   done();
+    this.timeout(36000);
+    const branches = p.parse("test/ifsc_small.xlsx");
+
+    branches.database.insert(branches.branches)
+    .then(() => done())
+    .catch(err => {
+      console.error(err);
+    });
+  //  done();
   });
 
   // checks for the string search results.
@@ -25,9 +24,9 @@ describe('database', function () {
     debug('in the searchdb');
     let output , j = 0, start = [];
     const database = new Database();
-    database.search('state bank of india kota rajasthan').then((res) => {
+    database.search('400065001').then((res) => {
       debug('results is ', res.length, res[0]);
-      expect(res[0].city).to.be.equal('KOTA');
+      expect(res[0].city).to.be.equal('MUMBAI');
       done()
     }).catch(err => console.error(err));
 

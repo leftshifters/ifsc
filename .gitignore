@@ -1,5 +1,7 @@
 *.xls
-si
 gocode
+ifsc_small.xlsx
+test/ifsc_download.xls
+test/ifsc.xls
 node_modules
 npm-debug.log

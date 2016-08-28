@@ -25,7 +25,7 @@ class Branches {
     }
 
     // Remove white spaces
-    method = method.replace(/\s+/g, '');
+    // method = method.replace(/\s+/g, '');
     // TODO : Add proper error handling
 
     // Based on the method defined, call the appropriate full text library

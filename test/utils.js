@@ -6,7 +6,7 @@ const utils  = require('../lib/utils');
 // console.log(__dirname + '/public/images/logo.png');
 describe('utils', function () {
   it('test for the existence', function () {
-    const filePath = 'test/ifsc.xls';
+    const filePath = 'test/ifsc_small.xlsx';
     const output = utils.fileExists(filePath);
     expect(output).to.be.equal(true);
   });

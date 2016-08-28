@@ -12,8 +12,8 @@ describe('inMemory', function () {
  // checks for the string search results
   it('find() mehthod should fetch all matching branches', function () {
     // let p = new Parser();
-    const branches = p.parse("test/ifsc_32mb.xls");
-    this.timeout(45000);
+    const branches = p.parse("test/ifsc_small.xlsx");
+    this.timeout(50000);
     const output = branches.find("mumbai",'');
     expect(output).to.be.not.null
     expect(output[0].city).to.be.equal('MUMBAI');

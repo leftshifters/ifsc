@@ -14,7 +14,7 @@ describe("Store", function() {
       expect(exists).to.be.false;
     });
 
-    s = new Store({ diskPath: "test/ifsc.xls" });
+    s = new Store({ diskPath: "test/ifsc_small.xlsx" });
     s.storeExists((err, stats, exists) => {
       expect(err).to.be.null;
       expect(stats).to.not.be.null;
@@ -35,30 +35,30 @@ describe("Store", function() {
     });
   });
 
-  it("parseStores() and getStore(): result should after parsing have correct length or not ", function() {
+  it("parseStores() and getStore(): result should after parsing have correct length.", function() {
     this.timeout(400000);
 
-    let s = new Store({ diskPath: "test/ifsc_32mb.xls" });
+    let s = new Store({ diskPath: "test/ifsc_small.xlsx" });
     s.parseStores();
     store = s.getStore();
-    expect(store.branches.length).to.be.equal(132602);
+    expect(store.branches.length).to.be.equal(5);
   });
 
   it("readLocalStore(): ifsc file records should not null and has correct length.", function(done) {
-    let filePath = "test/ifsc_32mb.xls";
+    let filePath = "test/ifsc_test.xls";
     let s = new Store({ diskPath: filePath });
-    this.timeout(400000);
+    this.timeout(480000);
 
     s.readLocalStore((err, branches) => {
       expect(err).to.be.null;
-      expect(branches.branches.length).to.be.equal(132602);
+      expect(branches.branches.length).to.be.equal(113);
       done();
     });
   });
 
   it("readLocalStore2(): read the local file and expect to have records", function(done) {
     this.timeout(400000);
-    filePath = "test/ifsc_32mb.xls";
+    filePath = "test/ifsc_test.xls";
 
     // Delete old file if it exists
     if (utils.fileExists(filePath)) {

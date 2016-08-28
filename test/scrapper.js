@@ -28,12 +28,12 @@ describe("Scrapper", function() {
 
   it("download(): Checks if the ifsc code file is downloaded or not.", function(done) {
 
-    var filePath = "test/ifsc_download.xls";
+    var filePath = "test/ifsc_test.xls";
     if (utils.fileExists()) {
       fs.unlinkSync(filePath);
     }
 
-    this.timeout(10000);
+    this.timeout(450000);
     let s = new Scrapper({ scanURL: "https://www.rbi.org.in/scripts/neft.aspx" });
     s.download("https://rbidocs.rbi.org.in/rdocs/Content/DOCs/IFCB2009_02.xls", filePath, (err) => {
       expect(err).to.be.equal(null);
